@@ -1,0 +1,6 @@
+framework module Pods_LTMMoyaDemo {
+  umbrella header "Pods-LTMMoyaDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -18,6 +18,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = .yellow
+        
+        LTMMoyaNetworkManager.shareManager.merchantLoginModuleRequest(target: .logout, targetName: "后期扩展使用,后续更新", successClosure: { (result) in
+            print("返回成功的结果\(result)")
+        }) { (code, message) in
+            print("错误编码\(code), 错误信息\(message)")
+        }
     }
 
 

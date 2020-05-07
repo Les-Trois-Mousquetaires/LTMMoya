@@ -24,8 +24,8 @@ enum LTMMoyaLoginApiService {
 }
 
 extension LTMMoyaLoginApiService: TargetType{
-    var baseURL: URL {
-        return URL(string: "host")!
+    var baseURL: URL {// 不同的CDN服务不同的配置,即可
+        return URL(string: "loginHost")!
     }
     
     var path: String {

@@ -19,6 +19,7 @@
 		274A32982462E18900C38427 /* LTMMoyaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A32972462E18900C38427 /* LTMMoyaNetworkManager.swift */; };
 		274A329A2462E1B400C38427 /* LTMLoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A32992462E1B400C38427 /* LTMLoginApi.swift */; };
 		274A329C2462E1D200C38427 /* LTMHomeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A329B2462E1D200C38427 /* LTMHomeApi.swift */; };
+		2770A9A12472A73000625131 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770A9A02472A73000625131 /* Model.swift */; };
 		5CDD93173052EE9786E92A3E /* Pods_LTMMoyaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5117C2A61DF67589B2CACCF6 /* Pods_LTMMoyaDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		274A32972462E18900C38427 /* LTMMoyaNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTMMoyaNetworkManager.swift; sourceTree = "<group>"; };
 		274A32992462E1B400C38427 /* LTMLoginApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTMLoginApi.swift; sourceTree = "<group>"; };
 		274A329B2462E1D200C38427 /* LTMHomeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTMHomeApi.swift; sourceTree = "<group>"; };
+		2770A9A02472A73000625131 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2CABB52ACA2A911DFFFDFBE2 /* Pods-LTMMoyaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTMMoyaDemo.debug.xcconfig"; path = "Target Support Files/Pods-LTMMoyaDemo/Pods-LTMMoyaDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5117C2A61DF67589B2CACCF6 /* Pods_LTMMoyaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LTMMoyaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21BDD14C96B701EAC879ED /* Pods-LTMMoyaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTMMoyaDemo.release.xcconfig"; path = "Target Support Files/Pods-LTMMoyaDemo/Pods-LTMMoyaDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				274A32972462E18900C38427 /* LTMMoyaNetworkManager.swift */,
 				274A32992462E1B400C38427 /* LTMLoginApi.swift */,
 				274A329B2462E1D200C38427 /* LTMHomeApi.swift */,
+				2770A9A02472A73000625131 /* Model.swift */,
 				274A326B2462E08100C38427 /* Main.storyboard */,
 				274A326E2462E08300C38427 /* Assets.xcassets */,
 				274A32702462E08300C38427 /* LaunchScreen.storyboard */,
@@ -346,6 +349,7 @@
 				274A32662462E08100C38427 /* AppDelegate.swift in Sources */,
 				274A329A2462E1B400C38427 /* LTMLoginApi.swift in Sources */,
 				274A32682462E08100C38427 /* SceneDelegate.swift in Sources */,
+				2770A9A12472A73000625131 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

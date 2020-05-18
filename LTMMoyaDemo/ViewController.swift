@@ -20,8 +20,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .yellow
         
-        LTMMoyaNetworkManager.shareManager.merchantLoginModuleRequest(target: .logout, targetName: "后期扩展使用,后续更新", successClosure: { (result) in
-            print("返回成功的结果\(result)")
+        LTMMoyaNetworkManager.shareManager.merchantLoginModuleRequest(target: .logout, targetName: InfoModel(), successClosure: { (result) in
+
+            guard let infoModel: InfoModel = result as? InfoModel else{ return }
+
+            print("返回成功的结果\(infoModel.name)")
         }) { (code, message) in
             print("错误编码\(code), 错误信息\(message)")
         }

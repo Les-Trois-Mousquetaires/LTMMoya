@@ -15,20 +15,19 @@ class LTMMoyaNetworkManager: LTMNetworkDeal {
     }
     
     //MARK: - 登录请求
-    private var loginProvider = MoyaProvider<LTMMoyaLoginApiService>(plugins: [NetworkLoggerPlugin()])
-    
-    public func merchantLoginModuleRequest(target: LTMMoyaLoginApiService, targetName: String, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
-        loginProvider.request(target) { (result) in
-            self.dealResult(targetName: targetName, result: result,successClosure: successClosure, failureClosure: failureClosure)
-        }
-    }
+     private var loginProvider = MoyaProvider<LTMMoyaLoginApiService>(plugins: [NetworkLoggerPlugin()])
+       public func merchantLoginModuleRequest<Model: LTMModel>(target: LTMMoyaLoginApiService, targetName: Model, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
+           loginProvider.request(target) { (result) in
+               self.dealWithResult(targetName: targetName, result: result,successClosure: successClosure, failureClosure: failureClosure)
+           }
+       }
     
     //MARK: - 首页接口
     private var homeProvider = MoyaProvider<LTMMoyaHomeApiService>(plugins: [NetworkLoggerPlugin()])
     
-    public func merchantSalesApplyModuleRequest(target: LTMMoyaHomeApiService, targetName: String, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
+    public func merchantSalesApplyModuleRequest<Model: LTMModel>(target: LTMMoyaHomeApiService, targetName: Model, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
         homeProvider.request(target) { (result) in
-            self.dealResult(targetName: targetName, result: result,successClosure: successClosure, failureClosure: failureClosure)
+            self.dealWithResult(targetName: targetName, result: result,successClosure: successClosure, failureClosure: failureClosure)
         }
     }
 }

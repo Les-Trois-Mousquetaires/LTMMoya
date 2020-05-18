@@ -12,8 +12,8 @@ import Alamofire
 class LTMNetworkDeal: NSObject {
     
     //MARK: - 数据处理中心
-    public func dealResult(targetName: String,result: Result<Response, MoyaError>, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
-
+    public func dealWithResult<Model: LTMModel>(targetName: Model,result: Result<Response, MoyaError>, successClosure:((_ result: Any) -> ())? = nil, failureClosure:((_ errorCode: Int, _ errorMessage: String) ->())? = nil){
+        
         switch result {
         case let .success(moyaResponse):
             switch moyaResponse.statusCode {
@@ -25,10 +25,12 @@ class LTMNetworkDeal: NSObject {
                 switch code {
                 case 200:
                     guard let systemEntity: [String: Any] = resultDic["entity"] as? [String : Any] else {
-                        successClosure?(self.success200Deal(response: resultDic, targetName: targetName ))
+                        successClosure?(self.success200DealWtih(response: resultDic, targetName: targetName ))
+                        
                         return
                     }
-                    successClosure?(self.success200Deal(response: systemEntity, targetName: targetName ))
+                    successClosure?(self.success200DealWtih(response: systemEntity, targetName: targetName ))
+                    
                 case 400:
                     if let errorServerMes = resultDic["message"]{
                         failureClosure?(400, self.error400Deal(response: errorServerMes) ?? "服务器异常,未确认错误信息")
@@ -42,31 +44,35 @@ class LTMNetworkDeal: NSObject {
                         failureClosure?(500, self.error500Deal(response: errorServerMes) ?? "服务器异常,未确认错误信息")
                     }
                 default:
-                    print("errorServerMes")
+                    if let errorServerMes = resultDic["message"]{
+                        failureClosure?(code, self.error500Deal(response: errorServerMes) ?? "服务器异常,未确认错误信息")
+                    }
                 }
             case 404:
+                print("错误消息 code \(moyaResponse.statusCode) 消息 \("api地址错误,请内部开发人员修改后重试")")
                 failureClosure?(moyaResponse.statusCode,"api地址错误,请内部开发人员修改后重试")
             case 500:
+                print("错误消息 code \(moyaResponse.statusCode) 消息 \("服务器响应错误,请内部开发人员修改后重试")")
                 failureClosure?(moyaResponse.statusCode,"服务器响应错误,请内部开发人员修改后重试")
             case 502:
+                print("错误消息 code \(moyaResponse.statusCode) 消息 \("服务器异常,未确认错误信息")")
                 failureClosure?(moyaResponse.statusCode, self.error502Deal(response: "errorServerMes") ?? "服务器异常,未确认错误信息")
             default:
+                print("错误消息 code \(moyaResponse.statusCode) 消息 \(self.error500Deal(response: "errorServerMes") ?? "服务器异常,未确认错误信息")")
                 failureClosure?(moyaResponse.statusCode, self.error500Deal(response: "errorServerMes") ?? "服务器异常,未确认错误信息")
-                break
             }
         case let .failure(error):
             print("error \(error)")
             failureClosure?(error.errorCode, error.errorDescription ?? "网络请求异常,请稍后重试!")
-            break
         }
     }
-    
     //MARK: - Deal info
     
-    func success200Deal(response: [String : Any], targetName: String) -> Any{
+    func success200DealWtih<Model: LTMModel>(response: [String : Any], targetName: Model) -> Any{
         
+        let resultModel = Model.deserialize(from: response)
         
-        return response
+        return resultModel ?? NSObject()
     }
     
     func error400Deal(response: Any) -> String?{
@@ -101,13 +107,13 @@ class LTMNetworkDeal: NSObject {
     
     func error502Deal(response: Any) -> String?{
         if let errorInfo:[String: Any] = response as? [String : Any]{
-            
             return errorInfo["message"] as? String
         }else{
             
             return "error502Deal"
         }
     }
+    
     func errorRequestDeal(response: Any) -> String{
         
         print("柯南 Deal errorRequestDeal info response success response - \(response)")
